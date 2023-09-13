@@ -4,6 +4,12 @@
 
 package com.mycompany.dcoffeeproject;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author USER
@@ -11,6 +17,22 @@ package com.mycompany.dcoffeeproject;
 public class DcoffeeProject {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Connection conn = null;
+        String url = "jdbc:sqlite:dcoffee.db";
+        try {
+            conn = DriverManager.getConnection(url);
+            System.out.println("Connection to sqlite has been sucess");
+        } catch (SQLException ex) {
+            Logger.getLogger(DcoffeeProject.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            if(conn!=null){
+                try{
+                    conn.close();
+                }catch(SQLException ex){
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+        
     }
 }
