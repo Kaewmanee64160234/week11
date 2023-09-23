@@ -4,7 +4,9 @@
  */
 package com.mycompany.dcoffeeproject;
 
+import com.mycompany.dcoffeeproject.model.User;
 import com.mycompany.dcoffeeproject.model.dao.UserDao;
+import com.mycompany.dcoffeeproject.model.dao.hepler.DatabaseHelper;
 
 /**
  *
@@ -13,8 +15,13 @@ import com.mycompany.dcoffeeproject.model.dao.UserDao;
 public class TestUserDao {
     public static void main(String[] args) {
         UserDao userDao = new UserDao();
-        System.out.println(userDao.get(2));
+        User user1 = new User("user3","password",2,"F");
+        User inserted = userDao.save(user1);
+        System.out.println(inserted);
+        DatabaseHelper.close();
+        
         
     }
+ 
     
 }
