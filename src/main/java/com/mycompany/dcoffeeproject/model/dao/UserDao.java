@@ -78,6 +78,35 @@ public class UserDao implements Dao<User> {
         }
 
     }
+    
+     public List<User> getAllOrderBy(String name,String order) {
+        ArrayList<User> list = new ArrayList();
+        String sql = "SELECT * FROM user ORDER BY "+name+" "+order;
+        Connection conn = DatabaseHelper.getConnect();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("user_id"));
+                user.setName(rs.getString("user_name"));
+                user.setRole(rs.getInt("user_role"));
+                user.setGender(rs.getString("user_gender"));
+                user.setPassword(rs.getString("user_password"));
+                list.add(user);
+//                System.out.println(user.toString());
+
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+
+    }
+    
+    
 
     @Override
     public User save(User obj) {

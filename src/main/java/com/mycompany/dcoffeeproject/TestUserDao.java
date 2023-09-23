@@ -24,8 +24,9 @@ public class TestUserDao {
 //        int idUpdated = inserted.getId();
 //        System.out.println(idUpdated);
 //        DatabaseHelper.close();
-       int num =  userDao.delete(user1);
-        System.out.println(num);
+//       int num =  userDao.delete(user1);
+//        System.out.println(num);
+        System.out.println(userDao.getAllOrderBy("user_name", "DESC"));
 
     }
 
