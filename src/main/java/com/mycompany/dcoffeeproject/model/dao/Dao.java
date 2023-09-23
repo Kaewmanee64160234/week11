@@ -4,10 +4,18 @@
  */
 package com.mycompany.dcoffeeproject.model.dao;
 
+import java.util.List;
+
 /**
  *
  * @author USER
  */
-public class dao {
+public interface Dao <T>{
+    T get(int id);
+    List<T> getAll();
+    T save(T obj);
+    T update(T obj);
+    int delete(T obj);
+    
     
 }
