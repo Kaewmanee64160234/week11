@@ -18,7 +18,7 @@ public class TestUserDao {
 
     public static void main(String[] args) {
         UserDao userDao = new UserDao();
-        User user1 = userDao.get(6);
+        User user1 = userDao.get(5);
 //        User inserted = userDao.save(user1);
 //        System.out.println(inserted.getId());
 //        inserted.setGender("F");
@@ -26,14 +26,14 @@ public class TestUserDao {
 //        int idUpdated = inserted.getId();
 //        System.out.println(idUpdated);
 //        DatabaseHelper.close();
-//       int num =  userDao.delete(user1);
-//        System.out.println(num);
+       int num =  userDao.delete(user1);
+        System.out.println(num);
 //        List<User> list  =  userDao.getAll("user_name like 'u%'", "user_name asc");
-        List<User> list = userDao.getAll();
-        for (User user : list) {
-            System.out.println(user);
-
-        }
+//        List<User> list = userDao.getAll();
+//        for (User user : list) {
+//            System.out.println(user);
+//
+//        }
 
     }
 
