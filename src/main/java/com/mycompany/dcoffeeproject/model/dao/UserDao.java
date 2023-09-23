@@ -43,19 +43,12 @@ public class UserDao implements Dao<User> {
 
 //                System.out.println(user.toString());
             }
+            return user;
         } catch (SQLException ex) {
-            Logger.getLogger(SelectDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+            return null;
         }
 
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-
-            }
-        }
-        return user;
     }
 
     @Override
@@ -78,24 +71,17 @@ public class UserDao implements Dao<User> {
 //                System.out.println(user.toString());
 
             }
+            return list;
         } catch (SQLException ex) {
-            Logger.getLogger(SelectDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+            return null;
         }
 
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-
-            }
-        }
-        return list;
     }
 
     @Override
     public User save(User obj) {
-       
+
         String sql = "INSERT INTO user  (user_name,user_gender,user_password,user_role) VALUES (?,?,?,?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
@@ -107,25 +93,37 @@ public class UserDao implements Dao<User> {
             stmt.executeUpdate();
             int id = DatabaseHelper.getInsertedId(stmt);
             obj.setId(id);
+            return obj;
         } catch (SQLException ex) {
-            Logger.getLogger(SelectDatabase.class.getName()).log(Level.SEVERE, null, ex);
-       return null;
+            System.out.println(ex.getMessage());
+
+            return null;
         }
 
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-
-            }
-        }
-        return obj;
     }
 
     @Override
     public User update(User obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Connection conn = DatabaseHelper.getConnect();
+        String sql = "UPDATE user"
+                + " SET user_name= ?,user_gender= ?,user_password= ?,user_role= ? \n"
+                + "WHERE user_id= ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, obj.getName());
+            stmt.setString(2, obj.getGender());
+            stmt.setString(3, obj.getPassword());
+            stmt.setInt(4, obj.getRole());
+            stmt.setInt(5, obj.getId());
+            int ret = stmt.executeUpdate();
+            System.out.println(ret);
+            System.out.println(sql);
+            return obj;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+
     }
 
     @Override
