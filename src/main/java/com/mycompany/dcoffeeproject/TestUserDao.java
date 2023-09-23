@@ -13,7 +13,7 @@ import com.mycompany.dcoffeeproject.model.dao.UserDao;
 public class TestUserDao {
     public static void main(String[] args) {
         UserDao userDao = new UserDao();
-        System.out.println(userDao.getAll());
+        System.out.println(userDao.get(2));
         
     }
     

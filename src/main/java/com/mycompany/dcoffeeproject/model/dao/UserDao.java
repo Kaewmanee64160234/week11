@@ -8,6 +8,7 @@ import com.mycompany.dcoffeeproject.SelectDatabase;
 import com.mycompany.dcoffeeproject.model.User;
 import com.mycompany.dcoffeeproject.model.dao.hepler.DatabaseHelper;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,7 +25,37 @@ public class UserDao implements Dao<User> {
 
     @Override
     public User get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        User user = null;
+        String sql = "SELECT * FROM user WHERE user_id=?";
+        Connection conn = DatabaseHelper.getConnect();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("user_id"));
+                user.setName(rs.getString("user_name"));
+                user.setRole(rs.getInt("user_role"));
+                user.setGender(rs.getString("user_gender"));
+                user.setPassword(rs.getString("user_password"));
+
+//                System.out.println(user.toString());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SelectDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+
+            }
+        }
+        return user;
     }
 
     @Override
