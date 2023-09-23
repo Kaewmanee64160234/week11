@@ -26,7 +26,7 @@ public class TestUserDao {
 //        DatabaseHelper.close();
 //       int num =  userDao.delete(user1);
 //        System.out.println(num);
-        System.out.println(userDao.getAllOrderBy("user_name", "DESC"));
+        System.out.println(userDao.getAll("user_name like 'u%'", "user_name asc"));
 
     }
 

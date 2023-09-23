@@ -79,9 +79,10 @@ public class UserDao implements Dao<User> {
 
     }
     
-     public List<User> getAllOrderBy(String name,String order) {
+    @Override
+     public List<User> getAll(String where,String order) {
         ArrayList<User> list = new ArrayList();
-        String sql = "SELECT * FROM user ORDER BY "+name+" "+order;
+        String sql = "SELECT * FROM user where "+where+" ORDER BY "+order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
