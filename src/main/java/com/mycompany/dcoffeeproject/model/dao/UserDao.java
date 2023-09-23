@@ -42,9 +42,9 @@ public class UserDao implements Dao<User> {
                 user.setName(rs.getString("user_name"));
                 user.setRole(rs.getInt("user_role"));
                 user.setGender(rs.getString("user_gender"));
-                user.setPassword(rs.getString("user_pasaword"));
+                user.setPassword(rs.getString("user_password"));
                 list.add(user);
-                System.out.println(rs.getInt("cat_id") + " " + rs.getString("cat_name"));
+//                System.out.println(user.toString());
 
             }
         } catch (SQLException ex) {
