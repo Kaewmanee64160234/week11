@@ -19,4 +19,5 @@ public interface Dao <T>{
     List<T> getAll(String where,String order);
     
     
+    
 }

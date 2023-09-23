@@ -7,6 +7,8 @@ package com.mycompany.dcoffeeproject;
 import com.mycompany.dcoffeeproject.model.User;
 import com.mycompany.dcoffeeproject.model.dao.UserDao;
 import com.mycompany.dcoffeeproject.model.dao.hepler.DatabaseHelper;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,7 +28,12 @@ public class TestUserDao {
 //        DatabaseHelper.close();
 //       int num =  userDao.delete(user1);
 //        System.out.println(num);
-        System.out.println(userDao.getAll("user_name like 'u%'", "user_name asc"));
+//        List<User> list  =  userDao.getAll("user_name like 'u%'", "user_name asc");
+        List<User> list = userDao.getAll();
+        for (User user : list) {
+            System.out.println(user);
+
+        }
 
     }
 

@@ -35,11 +35,7 @@ public class UserDao implements Dao<User> {
 
             while (rs.next()) {
                 user = new User();
-                user.setId(rs.getInt("user_id"));
-                user.setName(rs.getString("user_name"));
-                user.setRole(rs.getInt("user_role"));
-                user.setGender(rs.getString("user_gender"));
-                user.setPassword(rs.getString("user_password"));
+                user = user.fromRecordSet(rs);
 
 //                System.out.println(user.toString());
             }
@@ -62,11 +58,7 @@ public class UserDao implements Dao<User> {
 
             while (rs.next()) {
                 User user = new User();
-                user.setId(rs.getInt("user_id"));
-                user.setName(rs.getString("user_name"));
-                user.setRole(rs.getInt("user_role"));
-                user.setGender(rs.getString("user_gender"));
-                user.setPassword(rs.getString("user_password"));
+                user = user.fromRecordSet(rs);
                 list.add(user);
 //                System.out.println(user.toString());
 
@@ -78,11 +70,11 @@ public class UserDao implements Dao<User> {
         }
 
     }
-    
+
     @Override
-     public List<User> getAll(String where,String order) {
+    public List<User> getAll(String where, String order) {
         ArrayList<User> list = new ArrayList();
-        String sql = "SELECT * FROM user where "+where+" ORDER BY "+order;
+        String sql = "SELECT * FROM user where " + where + " ORDER BY " + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
@@ -90,11 +82,7 @@ public class UserDao implements Dao<User> {
 
             while (rs.next()) {
                 User user = new User();
-                user.setId(rs.getInt("user_id"));
-                user.setName(rs.getString("user_name"));
-                user.setRole(rs.getInt("user_role"));
-                user.setGender(rs.getString("user_gender"));
-                user.setPassword(rs.getString("user_password"));
+                user = user.fromRecordSet(rs);
                 list.add(user);
 //                System.out.println(user.toString());
 
@@ -106,8 +94,6 @@ public class UserDao implements Dao<User> {
         }
 
     }
-    
-    
 
     @Override
     public User save(User obj) {
@@ -169,10 +155,10 @@ public class UserDao implements Dao<User> {
 //            System.out.println(""+key.getInt(1));
             return status;
         } catch (SQLException ex) {
-           System.out.println(ex.getMessage());
-           
+            System.out.println(ex.getMessage());
+
         }
-         return -1;
+        return -1;
     }
 
 }
